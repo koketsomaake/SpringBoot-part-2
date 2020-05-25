@@ -1,23 +1,24 @@
 package com.project;
 
-import Models.User;
-import Service.UserService;
-import Service.UserServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import Controller.UserController;
 
-import javax.sound.sampled.Port;
-import java.net.URL;
+import Service.UserService;
+
+import org.junit.jupiter.api.Test;
+
+import org.springframework.boot.test.context.SpringBootTest;
+
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+
+
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SuppressWarnings("ALL")
 @SpringBootTest
 class ProjectApplicationTests<assertThat> {
+	private WebSecurityConfigurer webSecurityConfigurer;
+
 	@Test
 	void contextLoads() {
 	}
@@ -44,10 +45,7 @@ class ProjectApplicationTests<assertThat> {
 				return null;
 			}
 
-			@Override
-			public String User(long id) {
-				return null;
-			}
+
 		}.getUser(1)));
 
 
@@ -70,10 +68,7 @@ class ProjectApplicationTests<assertThat> {
 				return null;
 			}
 
-			@Override
-			public String User(long id) {
-				return null;
-			}
+
 		}.getUser(2)));
 
 		assertThat(Boolean.parseBoolean(new UserService() {
@@ -95,10 +90,7 @@ class ProjectApplicationTests<assertThat> {
 				return null;
 			}
 
-			@Override
-			public String User(long id) {
-				return null;
-			}
+
 		}.getUser(3)));
 
 		assertThat(Boolean.parseBoolean(new UserService() {
@@ -120,16 +112,12 @@ class ProjectApplicationTests<assertThat> {
 				return null;
 			}
 
-			@Override
-			public String User(long id) {
-				return null;
-			}
 		}.getUser(4)));
 
 	}
-	@Autowired
-	private TestRestTemplate template;
-
-	ResponseEntity<String> response = template.withBasicAuth(?).getForEntity(?)
-
+	@Test
+	public void SecurityConfigurerTest(){
+		assertThat(Boolean.parseBoolean(String.valueOf(webSecurityConfigurer)));
+	}
+	
 }
