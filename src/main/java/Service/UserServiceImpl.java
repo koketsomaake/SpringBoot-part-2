@@ -1,5 +1,6 @@
 package Service;
 
+import Intefaces.FakeRepo;
 import Intefaces.FakeRepoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,31 +9,30 @@ import org.springframework.stereotype.Service;
 
 //this an annotation for repository class
 @Service
-public abstract class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     // FakeRepoInterface
     @Autowired
-    private FakeRepoInterface fakeRepoInterface;
+    private final FakeRepo fakeRepo;
 
     // constructor parameter
-    public UserServiceImpl(@Qualifier("fakeInterfaces")FakeRepoInterface fakeRepoInterface) {
-        this.fakeRepoInterface = fakeRepoInterface;
+    public UserServiceImpl(@Qualifier("fakeInterfaces")FakeRepo fakeRepo) {
+        this.fakeRepo = fakeRepo;
     }
 
     //methods from the UserService Interface
     @Override
     public void addUser(long id, String name, String surname) {
-        fakeRepoInterface.insertUser(id,name,surname);
+        fakeRepo.insertUser(id,name,surname);
     }
 
     @Override
     public void removeUser(long id) {
-        fakeRepoInterface.deleteUser(id);
+        fakeRepo.deleteUser(id);
 
     }
     @Override
     @Cacheable("name")
-
     public String getUser(long id) {
         try
         {
@@ -43,7 +43,12 @@ public abstract class UserServiceImpl implements UserService {
         {
             e.printStackTrace();
         }
-        return fakeRepoInterface.findUserById(id);
+        return fakeRepo.findUserById(id);
+    }
+
+    @Override
+    public String User(long id) {
+        return null;
     }
 
 }
